@@ -1,6 +1,9 @@
 var square = document.getElementById("square");
 var movementRight = 0;
+var movementJump = 0;
 var idMovement = setInterval(voidFunction, 20000);
+var idJump;
+var jumpMove = false;
 var ticks = 0;
 var stopMovement;
 var rightMove = false;
@@ -16,6 +19,7 @@ function movement(e){
     if(e.key == "ArrowRight" || e.key == "ArrowLeft") // Related with the control of the player input
         button = e.key //Better control of the stop or continue movement of the square
     if(e.key == "ArrowRight" && !rightMove){
+        console.log("right");
         clearInterval(idMovement);
         leftMove = false;
         rightMove = true;
@@ -29,6 +33,10 @@ function movement(e){
         stopMovement = false;
         idMovement = setInterval(movementLeftAnimation, 20);
     }
+    if(e.key == " " && !jumpMove){
+        jumpMove = true;
+        idJump = setInterval(jump, 20);
+    }
 }
 
 function movementLeftAnimation(){
@@ -37,42 +45,42 @@ function movementLeftAnimation(){
             ticks++;
             movementRight -= 10;
             square.style.left = movementRight + "px";
-            square.style.bottom = "8px";
+            square.style.bottom = movementJump + 8 + "px";
             square.style.transform = "rotate(-10deg)";
             break;
         case 1:
             ticks++;
             movementRight -= 15;
             square.style.left = movementRight + "px";
-            square.style.bottom = "15px";
+            square.style.bottom = movementJump + 15 + "px";
             square.style.transform = "rotate(-20deg)";
             break;
         case 2:
             movementRight -= 20;
             ticks++;
             square.style.left = movementRight + "px";
-            square.style.bottom = "23px";
+            square.style.bottom = movementJump + 23 + "px";
             square.style.transform = "rotate(-45deg)";
             break;
         case 3:
             ticks++;
             movementRight -= 20;
             square.style.left = movementRight + "px";
-            square.style.bottom = "15px";
+            square.style.bottom = movementJump + 15+"px";
             square.style.transform = "rotate(-70deg)";
             break;
         case 4:
             ticks++;
             movementRight -= 15;
             square.style.left = movementRight + "px";
-            square.style.bottom = "8px";
+            square.style.bottom = movementJump + 8 + "px";
             square.style.transform = "rotate(-80deg)";
             break;
         case 5:
             movementRight -= 10;
             ticks = 0;
             square.style.left = movementRight + "px";
-            square.style.bottom = "0px";
+            square.style.bottom = movementJump + "px";
             square.style.transform = "none";
             if(stopMovement){
                 leftMove = false;
@@ -88,41 +96,41 @@ function movementRightAnimation(){
             ticks++;
             movementRight += 10;
             square.style.left = movementRight + "px";
-            square.style.bottom = "8px";
+            square.style.bottom = movementJump + 8 + "px";
             square.style.transform = "rotate(10deg)";
             break;
         case 1:
             ticks++;
             movementRight += 15;
             square.style.left = movementRight + "px";
-            square.style.bottom = "15px";
+            square.style.bottom = movementJump + 15 + "px";
             square.style.transform = "rotate(20deg)";
             break;
         case 2:
             movementRight += 20;
             ticks++;
             square.style.left = movementRight + "px";
-            square.style.bottom = "23px";
+            square.style.bottom = movementJump + 23+ "px";
             square.style.transform = "rotate(45deg)";
             break;
         case 3:
             ticks++;
             movementRight += 20;
             square.style.left = movementRight + "px";
-            square.style.bottom = "15px";
+            square.style.bottom = movementJump + 15+ "px";
             square.style.transform = "rotate(70deg)";
             break;
         case 4:
             ticks++;
             movementRight += 15;
             square.style.left = movementRight + "px";
-            square.style.bottom = "8px";
+            square.style.bottom = movementJump + 8 + "px";
             square.style.transform = "rotate(80deg)";
             break;
         case 5:
             movementRight += 10;
             ticks = 0;
-            square.style.bottom = "0px";
+            square.style.bottom = movementJump + "px";
             square.style.transform = "none";
             square.style.left = movementRight + "px";
             if(stopMovement){
