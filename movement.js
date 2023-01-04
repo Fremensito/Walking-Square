@@ -13,15 +13,16 @@ document.body.addEventListener("keydown", movement);
 document.body.addEventListener("keyup", stopMovementFunction);
 
 function movement(e){
-    button = e.key
-    if(button == "ArrowRight" && !rightMove){
+    if(e.key == "ArrowRight" || e.key == "ArrowLeft") // Related with the control of the player input
+        button = e.key //Better control of the stop or continue movement of the square
+    if(e.key == "ArrowRight" && !rightMove){
         clearInterval(idMovement);
         leftMove = false;
         rightMove = true;
         stopMovement = false;
         idMovement = setInterval(movementRightAnimation, 20);
     }
-    if(button == "ArrowLeft" && !leftMove){
+    if(e.key == "ArrowLeft" && !leftMove){
         clearInterval(idMovement);
         rightMove = false;
         leftMove = true;
@@ -133,7 +134,6 @@ function movementRightAnimation(){
 }
 
 function stopMovementFunction(e){
-    console.log(e.key);
     if(button == e.key)
         stopMovement = true;
 }
