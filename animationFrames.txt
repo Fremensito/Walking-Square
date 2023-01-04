@@ -1,0 +1,9 @@
+10 deg = 8px;
+
+20 deg = 15px
+
+45 deg = 23px
+
+70 deg = 15px;
+
+80 deg = 8px;
